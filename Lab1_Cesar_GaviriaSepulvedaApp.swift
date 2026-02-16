@@ -35,6 +35,19 @@ struct PrimeGameView: View {
                 .ignoresSafeArea()
 
             VStack(spacing: 20) {
+                // Timer 
+                Text("⏱️ \(timeRemaining)s")
+                    .font(.system(size: 20, weight: .semibold))
+                    .foregroundColor(.white)
+                    .padding(.horizontal, 25)
+                    .padding(.vertical, 10)
+                    .background(
+                        Capsule()
+                            .fill(Color(red: 1.0, green: 0.42, blue: 0.42))
+                            .shadow(color: .red.opacity(0.3), radius: 10)
+                    )
+                    .padding(.top, 30)
+
                 Spacer()
                 
                 Text("\(currentNumber)")
