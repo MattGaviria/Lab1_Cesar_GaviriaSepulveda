@@ -17,6 +17,18 @@ struct Lab1_Cesar_GaviriaSepulvedaApp: App {
 }
 
 struct PrimeGameView: View {
+    
+    // state
+    @State private var currentNumber = 67
+    @State private var correctAnswers = 0
+    @State private var wrongAnswers = 0
+    @State private var totalAttempts = 0
+    @State private var timeRemaining = 5
+    @State private var userFeedback = ""
+    @State private var canAnswer = true
+    @State private var showDialog = false
+    @State private var timer: Timer?
+
     var body: some View {
         Text("Prime Number Game")
             .font(.largeTitle)
