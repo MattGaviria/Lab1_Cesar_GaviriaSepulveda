@@ -33,6 +33,19 @@ struct PrimeGameView: View {
         Text("Prime Number Game")
             .font(.largeTitle)
     }
+    
+    // Prime check 
+    func isPrime(_ number: Int) -> Bool {
+        if number < 2 { return false }
+        if number == 2 { return true }
+        if number % 2 == 0 { return false }
+
+        let limit = Int(sqrt(Double(number)))
+        for i in stride(from: 3, through: limit, by: 2) {
+            if number % i == 0 { return false }
+        }
+        return true
+    }
 }
 
 struct PrimeGameView_Previews: PreviewProvider {
