@@ -32,6 +32,8 @@ struct PrimeGameView: View {
     var body: some View {
         Text("Prime Number Game")
             .font(.largeTitle)
+            .onAppear { startTimer() }
+            .onDisappear { timer?.invalidate() }
     }
     
     // Prime check 
@@ -45,6 +47,24 @@ struct PrimeGameView: View {
             if number % i == 0 { return false }
         }
         return true
+    }
+    
+    func startTimer() {
+        timer?.invalidate()
+        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
+            if canAnswer {
+                if timeRemaining > 0 {
+                    timeRemaining -= 1
+                } else {
+                    handleTimeout()
+                }
+            }
+        }
+    }
+    
+    func handleTimeout() {
+        guard canAnswer else { return }
+        canAnswer = false
     }
 }
 
