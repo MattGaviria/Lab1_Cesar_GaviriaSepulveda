@@ -30,10 +30,22 @@ struct PrimeGameView: View {
     @State private var timer: Timer?
 
     var body: some View {
-        Text("Prime Number Game")
-            .font(.largeTitle)
-            .onAppear { startTimer() }
-            .onDisappear { timer?.invalidate() }
+        ZStack {
+            Color(red: 0.95, green: 0.97, blue: 0.98)
+                .ignoresSafeArea()
+
+            VStack(spacing: 20) {
+                Spacer()
+                
+                Text("\(currentNumber)")
+                    .font(.largeTitle)
+                
+                Spacer()
+            }
+            .padding(.horizontal, 30)
+        }
+        .onAppear { startTimer() }
+        .onDisappear { timer?.invalidate() }
     }
     
     // Prime check 
