@@ -49,9 +49,17 @@ struct PrimeGameView: View {
                     .padding(.top, 30)
 
                 Spacer()
-                
+
+                // Number card
                 Text("\(currentNumber)")
-                    .font(.largeTitle)
+                    .font(.system(size: 120, weight: .heavy))
+                    .foregroundColor(Color(red: 0.18, green: 0.20, blue: 0.21))
+                    .frame(width: 250, height: 250)
+                    .background(
+                        RoundedRectangle(cornerRadius: 20)
+                            .fill(Color.white)
+                            .shadow(color: .black.opacity(0.1), radius: 15, x: 0, y: 10)
+                    )
                 
                 Spacer()
             }
