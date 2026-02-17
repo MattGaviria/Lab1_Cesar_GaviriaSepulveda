@@ -48,6 +48,12 @@ struct PrimeGameView: View {
                     )
                     .padding(.top, 30)
 
+                // score tracker
+                Text("Score: \(correctAnswers) / \(totalAttempts)")
+                    .font(.system(size: 18, weight: .medium))
+                    .foregroundColor(Color(red: 0.40, green: 0.49, blue: 0.92))
+                    
+
                 Spacer()
 
                 // Number card
@@ -61,6 +67,12 @@ struct PrimeGameView: View {
                             .shadow(color: .black.opacity(0.1), radius: 15, x: 0, y: 10)
                     )
                 
+                // score tracker
+                Text("Score: \(correctAnswers) / \(totalAttempts)")
+                    .font(.system(size: 18, weight: .medium))
+                    .foregroundColor(Color(red: 0.40, green: 0.49, blue: 0.92))
+                    
+
                 Spacer()
             }
             .padding(.horizontal, 30)
