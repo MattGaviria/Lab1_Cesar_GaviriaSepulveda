@@ -153,7 +153,9 @@ struct PrimeGameView: View {
     
     func updateScore(correct: Bool) {
         canAnswer = false
-        userFeedback = correct ? "correct" : "wrong"
+                withAnimation(.easeInOut(duration: 0.3)) {
+            userFeedback = correct ? "correct" : "wrong"
+        }
         correctAnswers += correct ? 1 : 0
         wrongAnswers += correct ? 0 : 1
         totalAttempts += 1
