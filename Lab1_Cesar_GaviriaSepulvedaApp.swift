@@ -53,6 +53,20 @@ struct PrimeGameView: View {
                     .font(.system(size: 18, weight: .medium))
                     .foregroundColor(Color(red: 0.40, green: 0.49, blue: 0.92))
                     
+                // Feedback icon
+                Group {
+                    if userFeedback == "correct" {
+                        Image(systemName: "checkmark")
+                            .font(.system(size: 80, weight: .bold))
+                            .foregroundColor(Color(red: 0.0, green: 0.72, blue: 0.58))
+                    } else if userFeedback == "wrong" {
+                        Image(systemName: "xmark")
+                            .font(.system(size: 80, weight: .bold))
+                            .foregroundColor(Color(red: 1.0, green: 0.42, blue: 0.42))
+                    }
+                }
+                .frame(height: 100)
+                    
 
                 Spacer()
 
@@ -71,6 +85,20 @@ struct PrimeGameView: View {
                 Text("Score: \(correctAnswers) / \(totalAttempts)")
                     .font(.system(size: 18, weight: .medium))
                     .foregroundColor(Color(red: 0.40, green: 0.49, blue: 0.92))
+                    
+                // Feedback icon
+                Group {
+                    if userFeedback == "correct" {
+                        Image(systemName: "checkmark")
+                            .font(.system(size: 80, weight: .bold))
+                            .foregroundColor(Color(red: 0.0, green: 0.72, blue: 0.58))
+                    } else if userFeedback == "wrong" {
+                        Image(systemName: "xmark")
+                            .font(.system(size: 80, weight: .bold))
+                            .foregroundColor(Color(red: 1.0, green: 0.42, blue: 0.42))
+                    }
+                }
+                .frame(height: 100)
                     
 
                 Spacer()
