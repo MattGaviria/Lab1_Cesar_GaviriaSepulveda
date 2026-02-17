@@ -34,14 +34,14 @@ struct PrimeGameView: View {
                 .ignoresSafeArea()
 
             VStack(spacing: 20) {
-                Text(" $(timeRemaining)s")
+                Text(" \(timeRemaining)s")
                     .font(.system(size: 20, weight: .semibold))
                     .foregroundColor(.white)
                     .padding(.horizontal, 25)
                     .padding(.vertical, 10)
                     .background(Capsule().fill(Color(red: 1.0, green: 0.42, blue: 0.42)))
 
-                Text("Score: $(correctAnswers) / $(totalAttempts)")
+                Text("Score: \(correctAnswers) / \(totalAttempts)")
                     .font(.system(size: 18, weight: .medium))
                     .foregroundColor(Color(red: 0.40, green: 0.49, blue: 0.92))
                     
@@ -60,42 +60,57 @@ struct PrimeGameView: View {
 
                 Spacer()
 
-                Text("$(currentNumber)")
+                Text("\(currentNumber)")
                     .font(.system(size: 120, weight: .heavy))
                     .foregroundColor(Color(red: 0.18, green: 0.20, blue: 0.21))
                     .frame(width: 250, height: 250)
                     .background(RoundedRectangle(cornerRadius: 20).fill(Color.white))
 
                 HStack(spacing: 20) {
-                    Button(action: { checkAnswer(userSaysPrime: true) }) {
-                        Text("PRIME")
-                            .font(.system(size: 18, weight: .bold))
-                            .foregroundColor(.white)
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(Capsule().fill(Color(red: 0.40, green: 0.49, blue: 0.92)))
-                    }
-                    .disabled(!canAnswer)
-
-                    Button(action: { checkAnswer(userSaysPrime: false) }) {
-                        Text("NOT PRIME")
-                            .font(.system(size: 18, weight: .bold))
-                            .foregroundColor(.white)
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(Capsule().fill(Color(red: 0.40, green: 0.49, blue: 0.92)))
-                    }
-                    .disabled(!canAnswer)
+                    gameButton("PRIME") { checkAnswer(userSaysPrime: true) }
+                    gameButton("NOT PRIME") { checkAnswer(userSaysPrime: false) }
                 }
                 .padding(.horizontal, 20)
                 .padding(.bottom, 20)
+
+                HStack(spacing: 15) {
+                    scoreCard("Correct", correctAnswers, Color(red: 0.0, green: 0.72, blue: 0.58))
+                    scoreCard("Wrong", wrongAnswers, Color(red: 1.0, green: 0.42, blue: 0.42))
+                    scoreCard("Total", totalAttempts, Color(red: 0.40, green: 0.49, blue: 0.92))
+                }
+                .padding(.horizontal, 10)
 
                 Spacer()
             }
             .padding(.horizontal, 20)
         }
-        .onAppear { startTimer() }
+        .onAppear { startGame() }
         .onDisappear { timer?.invalidate() }
+    }
+    
+    func gameButton(_ label: String, _ action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            Text(label)
+                .font(.system(size: 18, weight: .bold))
+                .foregroundColor(.white)
+                .frame(maxWidth: .infinity)
+                .padding()
+                .background(Capsule().fill(Color(red: 0.40, green: 0.49, blue: 0.92)))
+        }
+    }
+    
+    func scoreCard(_ title: String, _ value: Int, _ color: Color) -> some View {
+        VStack(spacing: 8) {
+            Text(title)
+                .font(.system(size: 14, weight: .medium))
+                .foregroundColor(.gray)
+            Text("\(value)")
+                .font(.system(size: 32, weight: .bold))
+                .foregroundColor(color)
+        }
+        .frame(maxWidth: .infinity)
+        .padding()
+        .background(RoundedRectangle(cornerRadius: 12).fill(Color.white))
     }
     
     func isPrime(_ number: Int) -> Bool {
@@ -109,6 +124,16 @@ struct PrimeGameView: View {
         return true
     }
     
+    func startGame() {
+        currentNumber = Int.random(in: 2...100)
+        correctAnswers = 0
+        wrongAnswers = 0
+        totalAttempts = 0
+        timeRemaining = 5
+        canAnswer = true
+        startTimer()
+    }
+    
     func startTimer() {
         timer?.invalidate()
         timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
@@ -120,19 +145,7 @@ struct PrimeGameView: View {
         }
     }
     
-        func gameButton(_ label: String, _ action: @escaping () -> Void) -> some View {
-        Button(action: action) {
-            Text(label)
-                .font(.system(size: 18, weight: .bold))
-                .foregroundColor(.white)
-                .frame(maxWidth: .infinity)
-                .padding()
-                .background(Capsule().fill(Color(red: 0.40, green: 0.49, blue: 0.92)))
-                .disabled(!canAnswer)
-        }
-    }
-    
-    func func checkAnswer(userSaysPrime: Bool) {
+    func checkAnswer(userSaysPrime: Bool) {
         let isPrimeNumber = isPrime(currentNumber)
         let isCorrect = userSaysPrime == isPrimeNumber
         updateScore(correct: isCorrect)
