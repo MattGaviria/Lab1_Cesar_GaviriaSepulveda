@@ -149,6 +149,17 @@ struct PrimeGameView: View {
         canAnswer = true
     }
     
+        func gameButton(_ label: String, _ action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            Text(label)
+                .font(.system(size: 18, weight: .bold))
+                .foregroundColor(.white)
+                .frame(maxWidth: .infinity)
+                .padding()
+                .background(Capsule().fill(Color(red: 0.40, green: 0.49, blue: 0.92)))
+        }
+    }
+    
     func handleTimeout() {
         canAnswer = false
         userFeedback = "wrong"
