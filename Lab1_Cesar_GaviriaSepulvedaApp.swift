@@ -120,7 +120,19 @@ struct PrimeGameView: View {
         }
     }
     
-    func checkAnswer(userSaysPrime: Bool) {
+        func gameButton(_ label: String, _ action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            Text(label)
+                .font(.system(size: 18, weight: .bold))
+                .foregroundColor(.white)
+                .frame(maxWidth: .infinity)
+                .padding()
+                .background(Capsule().fill(Color(red: 0.40, green: 0.49, blue: 0.92)))
+                .disabled(!canAnswer)
+        }
+    }
+    
+    func func checkAnswer(userSaysPrime: Bool) {
         let isPrimeNumber = isPrime(currentNumber)
         let isCorrect = userSaysPrime == isPrimeNumber
         updateScore(correct: isCorrect)
