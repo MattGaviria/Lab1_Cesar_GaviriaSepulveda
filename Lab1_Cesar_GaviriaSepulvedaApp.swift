@@ -85,7 +85,16 @@ struct PrimeGameView: View {
             .padding(.horizontal, 20)
         }
         .onAppear { startGame() }
-        .onDisappear { timer?.invalidate() }
+        .alert("Game Over", isPresented: $showDialog) {
+            Button("Restart") {
+                startGame()
+                showDialog = false
+            }
+        } message: {
+            Text("Correct: \(correctAnswers)\\nWrong: \(wrongAnswers)\\nTotal: \(totalAttempts)")
+        }
+    }
+    .onDisappear { timer?.invalidate() }
     }
     
     func gameButton(_ label: String, _ action: @escaping () -> Void) -> some View {
