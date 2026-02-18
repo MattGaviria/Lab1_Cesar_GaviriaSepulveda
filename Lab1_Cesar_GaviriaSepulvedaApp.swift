@@ -17,6 +17,9 @@ struct Lab1_Cesar_GaviriaSepulvedaApp: App {
 }
 
 struct PrimeGameView: View {
+    let primaryColor = Color(red: 0.40, green: 0.49, blue: 0.92)
+    let successColor = Color(red: 0.0, green: 0.72, blue: 0.58)
+    let dangerColor = Color(red: 1.0, green: 0.42, blue: 0.42)
     
     @State private var currentNumber = 67
     @State private var correctAnswers = 0
