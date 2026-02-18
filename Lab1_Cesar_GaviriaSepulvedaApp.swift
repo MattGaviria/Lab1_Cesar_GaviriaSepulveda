@@ -16,8 +16,8 @@ struct Lab1_Cesar_GaviriaSepulvedaApp: App {
     }
 }
 
-struct PrimeGameView: View
-    @Environment(\.dismiss) var dismiss {
+struct PrimeGameView: View {
+    @Environment(\.dismiss) var dismiss
     let primaryColor = Color(red: 0.40, green: 0.49, blue: 0.92)
     let successColor = Color(red: 0.0, green: 0.72, blue: 0.58)
     let dangerColor = Color(red: 1.0, green: 0.42, blue: 0.42)
@@ -95,10 +95,9 @@ struct PrimeGameView: View
                 showDialog = false
             }
         } message: {
-            Text("Correct: \(correctAnswers)\\nWrong: \(wrongAnswers)\\nTotal: \(totalAttempts)")
+            Text("Correct: \(correctAnswers)\nWrong: \(wrongAnswers)\nTotal: \(totalAttempts)")
         }
-    }
-    .onDisappear { timer?.invalidate() }
+        .onDisappear { timer?.invalidate() }
     }
     
     func gameButton(_ label: String, _ action: @escaping () -> Void) -> some View {
@@ -107,12 +106,12 @@ struct PrimeGameView: View
                 .font(.system(size: 18, weight: .bold))
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity)
-                .padding().shadow(color: .black.opacity(0.05), radius: 3)
+                .padding()
                 .background(Capsule().fill(Color(red: 0.40, green: 0.49, blue: 0.92)))
         }
+        .disabled(!canAnswer)
+        .opacity(canAnswer ? 1.0 : 0.6)
     }
-    
-    func scoreCard(_ title: String, _ value: Int, _ color: Color) -> some View {
         VStack(spacing: 8) {
             Text(title)
                 .font(.system(size: 14, weight: .medium))
@@ -122,8 +121,9 @@ struct PrimeGameView: View
                 .foregroundColor(color)
         }
         .frame(maxWidth: .infinity)
-        .padding().shadow(color: .black.opacity(0.05), radius: 3)
+        .padding()
         .background(RoundedRectangle(cornerRadius: 12).fill(Color.white))
+        .shadow(color: .black.opacity(0.05), radius: 3)
     }
     
     // Optimized prime number checking using sqrt limit
@@ -151,7 +151,7 @@ struct PrimeGameView: View
     
     func startTimer() {
         timer?.invalidate()
-        timer = Timer.scheduledTimer((withTimeInterval: 1.0), repeats: true) { _ in
+        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
             if canAnswer && timeRemaining > 0 {
                 timeRemaining -= 1
             } else if timeRemaining == 0 && canAnswer {
@@ -168,7 +168,7 @@ struct PrimeGameView: View
     
     func updateScore(correct: Bool) {
         canAnswer = false
-                withAnimation(.easeInOut(duration: 0.3)) {
+        withAnimation(.easeInOut(duration: 0.3)) {
             userFeedback = correct ? "correct" : "wrong"
         }
         correctAnswers += correct ? 1 : 0
