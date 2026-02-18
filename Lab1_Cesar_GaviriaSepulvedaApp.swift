@@ -150,7 +150,7 @@ struct PrimeGameView: View {
     
     func startTimer() {
         timer?.invalidate()
-        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
+        timer = Timer.scheduledTimer((withTimeInterval: 1.0), repeats: true) { _ in
             if canAnswer && timeRemaining > 0 {
                 timeRemaining -= 1
             } else if timeRemaining == 0 && canAnswer {
