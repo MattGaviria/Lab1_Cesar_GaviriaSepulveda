@@ -107,7 +107,7 @@ struct PrimeGameView: View
                 .font(.system(size: 18, weight: .bold))
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity)
-                .padding()
+                .padding().shadow(color: .black.opacity(0.05), radius: 3)
                 .background(Capsule().fill(Color(red: 0.40, green: 0.49, blue: 0.92)))
         }
     }
@@ -122,7 +122,7 @@ struct PrimeGameView: View
                 .foregroundColor(color)
         }
         .frame(maxWidth: .infinity)
-        .padding()
+        .padding().shadow(color: .black.opacity(0.05), radius: 3)
         .background(RoundedRectangle(cornerRadius: 12).fill(Color.white))
     }
     
