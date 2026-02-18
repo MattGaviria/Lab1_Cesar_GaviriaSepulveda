@@ -122,6 +122,7 @@ struct PrimeGameView: View {
         .background(RoundedRectangle(cornerRadius: 12).fill(Color.white))
     }
     
+    // Optimized prime number checking using sqrt limit
     func isPrime(_ number: Int) -> Bool {
         if number < 2 { return false }
         if number == 2 { return true }
@@ -133,6 +134,7 @@ struct PrimeGameView: View {
         return true
     }
     
+    // Initialize new game round
     func startGame() {
         currentNumber = Int.random(in: 2...100)
         correctAnswers = 0
